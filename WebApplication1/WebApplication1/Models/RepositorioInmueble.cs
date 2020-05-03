@@ -24,7 +24,7 @@ namespace WebApplication1.Models
             int res = -1;
             using (SqlConnection connection = new SqlConnection(connectionString)) 
             {
-                string sql = "$INSERT INTO Inmueble(id_Propeario,direccionInm,uso,tipo,cantAmbientes,precioInm,estadoInm)" +
+                string sql = "$INSERT INTO Inmueble(id_Propietario,direccionInm,uso,tipo,cantAmbientes,precioInm,estadoInm)" +
                     $"VALUES (@idP,@dire,@uso,@tipo,@cantA,@precio,@estado)" +
                     $"SELECT SCOPE_IDENTITY();";
 
@@ -82,7 +82,6 @@ namespace WebApplication1.Models
                     command.Parameters.AddWithValue("@cantA",i.CantAmbientes);
                     command.Parameters.AddWithValue("@precio",i.PrecioInm);
                     command.Parameters.AddWithValue("@estado",i.EstadoInm);
-
                     connection.Open();
                     res = command.ExecuteNonQuery();
                     connection.Close();
@@ -110,16 +109,15 @@ namespace WebApplication1.Models
                         Inmueble i = new Inmueble
                         {
                             Id_Inmueble = reader.GetInt32(0),
-                            Id_Propietario = reader.GetInt32(1),
-                            DireccionInm = reader.GetString(2),
-                            Uso = reader.GetString(3),
-                            Tipo = reader.GetString(4),
-                            CantAmbientes = reader.GetInt32(5),
-                            PrecioInm = reader.GetFloat(6),
-                            EstadoInm = reader.GetInt32(7),
-
-                            /*  Propietario p = new Propietario
+                            DireccionInm = reader.GetString(1),
+                            Uso = reader.GetString(2),
+                            Tipo = reader.GetString(3),
+                            CantAmbientes = reader.GetInt32(4),
+                            PrecioInm = reader.GetFloat(5),
+                            EstadoInm = reader.GetInt32(6),
+                         /*    p = new Propietario
                               {
+                                  Id_Propietario=reader.GetInt32(7),
                                   NombreP= reader.GetString(8),
                                   ApellidoP=reader.GetString(9),
 

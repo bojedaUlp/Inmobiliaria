@@ -70,8 +70,27 @@ namespace WebApplication1.Models
             int res = -1;
             using (SqlConnection connection=new SqlConnection(connectionString))
             {
-                string sql = "";
+                string sql = $"UPDATE Contrato SET id_Inmueble=@idInmueble, id_Inquilino=@inqui, id_Pago=@pago, fechaDesde=@fechaD, fechaHasta=@fechaH, importeMensual=@importe, estadoContrato=@estado" +
+                        $"WHERE id_Contrato=@idC;";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.AddWithValue("@idInmueble",c.Id_Inmueble);
+                    command.Parameters.AddWithValue("@inqui",c.Id_Inquilino);
+                    command.Parameters.AddWithValue("@pago",c.Id_Pago);
+                    command.Parameters.AddWithValue("@fechaD",c.FechaDesde);
+                    command.Parameters.AddWithValue("@fechaH",c.FechaHasta);
+                    command.Parameters.AddWithValue("@importe", c.ImporteMensual);
+                    command.Parameters.AddWithValue("@estado",c.estadoContrato);
+                    command.Parameters.AddWithValue("@idC",c.Id_Contrato);
+                    connection.Open();
+                    res = command.ExecuteNonQuery();
+                    connection.Close();
+                }
             }
+
+            return res;
         }
 
     }

@@ -24,7 +24,7 @@ namespace WebApplication1.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"INSERT INTO Propietarios (nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP) " +
+				string sql = $"INSERT INTO Propietario (nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP) " +
 					$"VALUES (@nombre, @apellido, @domicilio, @dni, @telefono, @email);" +
 					$"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
 				using (SqlCommand command = new SqlCommand(sql, connection))

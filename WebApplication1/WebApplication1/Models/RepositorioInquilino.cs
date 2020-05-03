@@ -105,7 +105,7 @@ namespace WebApplication1.Models
 			IList<Inquilino> res = new List<Inquilino>();
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT nombreI,apellidoI,dniI,domicilioI,telefonoI,oficioI,nombreG,apellidoG,dniG,telefonoG,domicilioG" +
+				string sql = $"SELECT id_Inquilino, nombreI,apellidoI,dniI,domicilioI,telefonoI,oficioI,nombreG,apellidoG,dniG,telefonoG,domicilioG" +
 					$" FROM Inquilino";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -137,5 +137,49 @@ namespace WebApplication1.Models
 			}
 			return res;
 		}
+
+		public Inquilino ObtenerPorId(int id)
+		{
+			Inquilino i = null;
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				string sql = $"SELECT nombreI,apellidoI,dniI,domicilioI,telefonoI,oficioI,nombreG,apellidoG,dniG,telefonoG,domicilioG" +
+						$"From Inquilino WHERE id_Inquilino=@id";
+
+				using (SqlCommand command= new SqlCommand(sql, connection))
+				{
+					command.CommandType = CommandType.Text;
+					command.Parameters.AddWithValue("@id",id);
+					connection.Open();
+					var reader = command.ExecuteReader();
+					while (reader.Read())
+					{
+						i = new Inquilino
+						{
+							Id_Inquilino = reader.GetInt32(1),
+							NombreI = reader.GetString(2),
+							ApellidoI = reader.GetString(3),
+							DniI = reader.GetString(4),
+							DomicilioI = reader.GetString(5),
+							TelefonoI = reader.GetString(6),
+							OficioI = reader.GetString(7),
+							NombreG = reader.GetString(8),
+							ApellidoG = reader.GetString(9),
+							DniG = reader.GetString(10),
+							TelefonoG = reader.GetString(11),
+							DomicilioG = reader.GetString(12),
+
+						};
+
+						return i;
+					}
+					connection.Close();
+				}
+			}
+
+			return i;
+
+		}
+
 	}
 }

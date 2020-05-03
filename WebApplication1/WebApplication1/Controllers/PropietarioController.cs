@@ -42,10 +42,12 @@ namespace WebApplication1.Controllers
         // POST: Propietario/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Propietario p)
         {
             try
             {
+                int res = repositorioPropietario.Alta(p);
+
                 // TODO: Add insert logic here
 
                 return RedirectToAction(nameof(Index));
