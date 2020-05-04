@@ -8,7 +8,8 @@ namespace WebApplication1.Models
     public class Pago
     {
         public int Id_Pago { get; set; }
-
+        public int Id_Contrato{ get; set; }
+        public Contrato Contrato { get; set; }
         public float Importe { get; set; }
         public DateTime FechaPago { get; set; }
     }

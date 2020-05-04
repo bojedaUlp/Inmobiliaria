@@ -9,11 +9,12 @@ namespace WebApplication1.Models
     {
         public int Id_Contrato { get; set; }
         public int Id_Inquilino { get; set; }
+        public Inquilino Inquilino { get; set; }
         public int Id_Inmueble { get; set; }
-        public int Id_Pago { get; set; }
+        public Inmueble Inmueble { get; set; }     
         public DateTime FechaDesde { get; set; }
         public DateTime FechaHasta { get; set; }
-        public float ImporteMensual { get; set; }
-        public int estadoContrato { get; set; }
+        public Decimal ImporteMensual { get; set; }
+        public int EstadoContrato { get; set; }
     }
 }

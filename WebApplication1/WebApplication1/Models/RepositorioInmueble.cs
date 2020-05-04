@@ -83,7 +83,6 @@ namespace WebApplication1.Models
                     command.Parameters.AddWithValue("@cantA",i.CantAmbientes);
                     command.Parameters.AddWithValue("@precio",i.PrecioInm);
                     command.Parameters.AddWithValue("@estado",i.EstadoInm);
-                    command.Parameters.AddWithValue("@idI", i.Id_Inmueble);
                     command.Parameters.AddWithValue("@idP", i.Id_Propietario);
                     connection.Open();
                     res = command.ExecuteNonQuery();
