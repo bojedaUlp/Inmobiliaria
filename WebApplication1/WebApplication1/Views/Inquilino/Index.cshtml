@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebApplication1.Models.Propietario>
+﻿@model IEnumerable<WebApplication1.Models.Inquilino>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,25 +13,40 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id_Propietario)
+                @Html.DisplayNameFor(model => model.Id_Inquilino)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreP)
+                @Html.DisplayNameFor(model => model.NombreI)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ApellidoP)
+                @Html.DisplayNameFor(model => model.ApellidoI)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DniP)
+                @Html.DisplayNameFor(model => model.DniI)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DomicilioP)
+                @Html.DisplayNameFor(model => model.DomicilioI)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TelefonoP)
+                @Html.DisplayNameFor(model => model.TelefonoI)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EmailP)
+                @Html.DisplayNameFor(model => model.OficioI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DniG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefonoG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DomicilioG)
             </th>
             <th></th>
         </tr>
@@ -40,30 +55,45 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_Propietario)
+                @Html.DisplayFor(modelItem => item.Id_Inquilino)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreP)
+                @Html.DisplayFor(modelItem => item.NombreI)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ApellidoP)
+                @Html.DisplayFor(modelItem => item.ApellidoI)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DniP)
+                @Html.DisplayFor(modelItem => item.DniI)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DomicilioP)
+                @Html.DisplayFor(modelItem => item.DomicilioI)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TelefonoP)
+                @Html.DisplayFor(modelItem => item.TelefonoI)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EmailP)
+                @Html.DisplayFor(modelItem => item.OficioI)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.NombreG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidoG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DniG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelefonoG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DomicilioG)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_Inquilino }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_Inquilino }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_Inquilino })
             </td>
         </tr>
 }

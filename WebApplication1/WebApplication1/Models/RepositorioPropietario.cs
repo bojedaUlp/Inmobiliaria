@@ -66,8 +66,8 @@ namespace WebApplication1.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"UPDATE Propietario SET nombreP=@nombre, apellidoP=@apellido, domicilioP=@domicilio, telefonoP=@telefono, emailP=@email" +
-					$"WHERE id_Propietario = @id";
+				string sql = $"UPDATE Propietario SET nombreP=@nombre, apellidoP=@apellido,dniP=@dni, domicilioP=@domicilio, telefonoP=@telefono, emailP=@email" +
+					$" WHERE id_Propietario = @id";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
 					command.CommandType = CommandType.Text;
@@ -77,6 +77,7 @@ namespace WebApplication1.Models
 					command.Parameters.AddWithValue("@dni", p.DniP);
 					command.Parameters.AddWithValue("@telefono", p.TelefonoP);
 					command.Parameters.AddWithValue("@email", p.EmailP);
+					command.Parameters.AddWithValue("@id", p.Id_Propietario);
 					connection.Open();
 					res = command.ExecuteNonQuery();
 					connection.Close();

@@ -50,8 +50,9 @@ namespace WebApplication1.Controllers
                 int res = repositorioInquilino.Alta(i);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
@@ -59,45 +60,66 @@ namespace WebApplication1.Controllers
         // GET: Inquilino/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                Inquilino i = repositorioInquilino.ObtenerPorId(id);
+                return View(i);
+            }catch(Exception ex)
+            {
+                ViewBag.Eror = ex.Message;
+                return View();
+            }
         }
 
         // POST: Inquilino/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Inquilino i)
         {
             try
             {
                 // TODO: Add update logic here
 
+                int res = repositorioInquilino.Modificacion(i);
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(i);
             }
         }
 
         // GET: Inquilino/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                Inquilino i = repositorioInquilino.ObtenerPorId(id);
+                return View(i);
+            }catch(Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+            
         }
 
         // POST: Inquilino/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Inquilino i)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                int res = repositorioInquilino.Baja(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }

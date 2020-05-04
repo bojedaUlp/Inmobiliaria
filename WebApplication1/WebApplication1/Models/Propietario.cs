@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace WebApplication1.Models
 {
     public class Propietario
     {
+        [DisplayName ("Codigo")]
         public int Id_Propietario { get; set; }
 
         public String NombreP { get; set; }

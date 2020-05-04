@@ -25,7 +25,7 @@ namespace WebApplication1.Models
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				string sql = $"INSERT INTO Inquilino (nombreI,apellidoI,dniI,domicilioI,telefonoI,oficioI,nombreG,apellidoG,dniG,telefonoG,domicilioG) " +
-					$"VALUES (@nombreI, @apellidoI, @dniI, @domicilioI, @telefonoI, @oficioI, @nombreG, @apellidoG, @dniG, @telefonoG, domicilioG);" +
+					$"VALUES (@nombreI, @apellidoI, @dniI, @domicilioI, @telefonoI, @oficioI, @nombreG, @apellidoG, @dniG, @telefonoG, @domicilioG);" +
 					$"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -74,7 +74,7 @@ namespace WebApplication1.Models
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
 				string sql = $"UPDATE Inquilino SET nombreI=@nombreI, apellidoI=@apellidoI, dniI=@dniI, domicilioI=@domicilioI, telefonoI=@telefonoI,oficioI=@oficioI,nombreG=@nombreG,apellidoG=@apellidoG,dniG=@dniG,telefonoG=@telefonoG,domicilioG=@domicilioG" +
-				$"WHERE id_Inquilino=@id";
+				$" WHERE id_Inquilino=@id";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
 					command.CommandType = CommandType.Text;
@@ -143,8 +143,8 @@ namespace WebApplication1.Models
 			Inquilino i = null;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT nombreI,apellidoI,dniI,domicilioI,telefonoI,oficioI,nombreG,apellidoG,dniG,telefonoG,domicilioG" +
-						$"From Inquilino WHERE id_Inquilino=@id";
+				string sql = $"SELECT id_Inquilino,nombreI,apellidoI,dniI,domicilioI,telefonoI,oficioI,nombreG,apellidoG,dniG,telefonoG,domicilioG" +
+						$" From Inquilino WHERE id_Inquilino=@id";
 
 				using (SqlCommand command= new SqlCommand(sql, connection))
 				{
@@ -156,18 +156,18 @@ namespace WebApplication1.Models
 					{
 						i = new Inquilino
 						{
-							Id_Inquilino = reader.GetInt32(1),
-							NombreI = reader.GetString(2),
-							ApellidoI = reader.GetString(3),
-							DniI = reader.GetString(4),
-							DomicilioI = reader.GetString(5),
-							TelefonoI = reader.GetString(6),
-							OficioI = reader.GetString(7),
-							NombreG = reader.GetString(8),
-							ApellidoG = reader.GetString(9),
-							DniG = reader.GetString(10),
-							TelefonoG = reader.GetString(11),
-							DomicilioG = reader.GetString(12),
+							Id_Inquilino = reader.GetInt32(0),
+							NombreI = reader.GetString(1),
+							ApellidoI = reader.GetString(2),
+							DniI = reader.GetString(3),
+							DomicilioI = reader.GetString(4),
+							TelefonoI = reader.GetString(5),
+							OficioI = reader.GetString(6),
+							NombreG = reader.GetString(7),
+							ApellidoG = reader.GetString(8),
+							DniG = reader.GetString(9),
+							TelefonoG = reader.GetString(10),
+							DomicilioG = reader.GetString(11),
 
 						};
 

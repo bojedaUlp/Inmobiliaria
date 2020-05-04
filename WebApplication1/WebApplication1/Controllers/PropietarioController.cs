@@ -61,45 +61,64 @@ namespace WebApplication1.Controllers
         // GET: Propietario/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                Propietario p = repositorioPropietario.ObtenerPorId(id);
+                return View(p);
+            }
+            catch(Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
         }
 
         // POST: Propietario/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Propietario p)
         {
             try
             {
                 // TODO: Add update logic here
-
+                int res = repositorioPropietario.Modificacion(p);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.Error(ex.Message);
+                return View(p);
             }
         }
 
         // GET: Propietario/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                Propietario p = repositorioPropietario.ObtenerPorId(id);
+                return View(p);
+            }catch(Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
         }
 
         // POST: Propietario/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Propietario p)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                int res = repositorioPropietario.Baja(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }

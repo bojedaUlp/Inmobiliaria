@@ -234,4 +234,12 @@ C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\ob
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.genruntimeconfig.cache
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Propietario\Create.cshtml.g.cs
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inquilino\Index.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Propietario\Edit.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Propietario\Delete.cshtml.g.cs
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inquilino\Create.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inquilino\Edit.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inquilino\Delete.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inmueble\Create.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inmueble\Index.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inmueble\Edit.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inmueble\Delete.cshtml.g.cs
