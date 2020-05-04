@@ -42,68 +42,89 @@ namespace WebApplication1.Controllers
         // GET: Contrato/Create
         public ActionResult Create()
         {
+            ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
+            ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
             return View();
         }
 
         // POST: Contrato/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Contrato c)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                int res = repositorioContrato.Alta(c);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
+                ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
+                ViewBag.Error = ex.Message;
+                return View(c);
             }
         }
 
         // GET: Contrato/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var c = repositorioContrato.ObtenerPorId(id);
+            ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
+            ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
+            return View(c);
         }
 
         // POST: Contrato/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Contrato c)
         {
             try
             {
                 // TODO: Add update logic here
-
+                int res = repositorioContrato.Modificacion(c);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
+                ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
+                ViewBag.Error = ex.Message;
+                return View(c);
             }
         }
 
         // GET: Contrato/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var c = repositorioContrato.ObtenerPorId(id);
+                return View(c);
+            }catch(Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+            
         }
 
         // POST: Contrato/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Contrato c)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                int res = repositorioContrato.Baja(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }

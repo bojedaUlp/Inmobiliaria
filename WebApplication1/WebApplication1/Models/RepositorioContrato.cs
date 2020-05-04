@@ -97,8 +97,8 @@ namespace WebApplication1.Models
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 string sql = $" SELECT id_Contrato, c.id_Inquilino, c.id_Inmueble , fechaDesde, fechaHasta, importeMensual, estadoContrato, " +
-                    " i.nombreI, i.apellidoI " + " in.DirecionInm " +
-                    $" FROM Contrato c INNER JOIN Inmueble in ON c.id_Inmueble = in.id_Inmueble " +
+                    " i.nombreI, i.apellidoI " + " inm.DirecionInm " +
+                    $" FROM Contrato c INNER JOIN Inmueble inm ON c.id_Inmueble = inm.id_Inmueble " +
                     $" INNER JOIN Inquilino i ON c.id_Inquilino = i.id_Inquilino ";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
