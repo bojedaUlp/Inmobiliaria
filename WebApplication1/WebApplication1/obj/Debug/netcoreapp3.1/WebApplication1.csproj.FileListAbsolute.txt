@@ -244,3 +244,6 @@ C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\ob
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inmueble\Edit.cshtml.g.cs
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inmueble\Delete.cshtml.g.cs
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Contrato\Index.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Contrato\Create.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Contrato\Delete.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Contrato\Edit.cshtml.g.cs

@@ -32,7 +32,7 @@ namespace WebApplication1.Models
                 {
                     command.CommandType = CommandType.Text;
                     command.Parameters.AddWithValue("@idInmueble",c.Id_Inmueble);
-                    command.Parameters.AddWithValue("@idIquilino",c.Id_Inquilino);
+                    command.Parameters.AddWithValue("@idInquilino",c.Id_Inquilino);
                     command.Parameters.AddWithValue("@fechaD",c.FechaDesde);
                     command.Parameters.AddWithValue("@fechaH",c.FechaHasta);
                     command.Parameters.AddWithValue("@importe",c.ImporteMensual);
@@ -96,8 +96,8 @@ namespace WebApplication1.Models
             IList<Contrato> res = new List<Contrato>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sql = $" SELECT id_Contrato, c.id_Inquilino, c.id_Inmueble , fechaDesde, fechaHasta, importeMensual, estadoContrato, " +
-                    " i.nombreI, i.apellidoI " + " inm.DirecionInm " +
+                string sql = $" SELECT id_Contrato, c.id_Inmueble, c.id_Inquilino , fechaDesde, fechaHasta, importeMensual, estadoContrato, " +
+                    " i.nombreI, i.apellidoI, inm.direccionInm " +
                     $" FROM Contrato c INNER JOIN Inmueble inm ON c.id_Inmueble = inm.id_Inmueble " +
                     $" INNER JOIN Inquilino i ON c.id_Inquilino = i.id_Inquilino ";
 
@@ -111,8 +111,8 @@ namespace WebApplication1.Models
                         Contrato c = new Contrato
                         {
                             Id_Contrato = reader.GetInt32(0),
-                            Id_Inquilino= reader.GetInt32(1),
-                            Id_Inmueble= reader.GetInt32(2),
+                            Id_Inmueble = reader.GetInt32(1),
+                            Id_Inquilino = reader.GetInt32(2),
                             FechaDesde= reader.GetDateTime(3),
                             FechaHasta= reader.GetDateTime(4),
                             ImporteMensual= reader.GetDecimal(5),
@@ -120,14 +120,14 @@ namespace WebApplication1.Models
 
                             Inquilino = new Inquilino
                             {
-                                Id_Inquilino=reader.GetInt32(1),
+                                Id_Inquilino=reader.GetInt32(2),
                                 NombreI=reader.GetString(7),
                                 ApellidoI=reader.GetString(8),
                             },
 
                             Inmueble=new Inmueble
                             {
-                                Id_Inmueble=reader.GetInt32(2),
+                                Id_Inmueble=reader.GetInt32(1),
                                 DireccionInm=reader.GetString(9)
                             }
 
@@ -145,13 +145,13 @@ namespace WebApplication1.Models
         public Contrato ObtenerPorId(int id)
         {
             Contrato res = null;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString)) 
             {
-                string sql = $" SELECT id_Contrato, c.id_Inquilino, c.id_Inmueble , fechaDesde, fechaHasta, importeMensual, estadoContrato, " +
-                    " i.nombreI, i.apellidoI " + " in.DirecionInm " +
-                    $"FROM Contrato c INNER JOIN Inmueble in ON c.id_Inmueble = in.id_Inmueble " +
-                    $" INNER JOIN Inquilino i ON c.id_Inquilino = i.id_Inquilino " +
-                    $" WHERE c.id_Contrato = @idC ";
+                string sql = $" SELECT id_Contrato, c.id_Inmueble, c.id_Inquilino , fechaDesde, fechaHasta, importeMensual, estadoContrato, " +
+                   " i.nombreI, i.apellidoI, inm.direccionInm " +
+                   $" FROM Contrato c INNER JOIN Inmueble inm ON c.id_Inmueble = inm.id_Inmueble " +
+                   $" INNER JOIN Inquilino i ON c.id_Inquilino = i.id_Inquilino " +
+                   $" WHERE c.id_Contrato = @idC ";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -164,8 +164,8 @@ namespace WebApplication1.Models
                         Contrato c = new Contrato
                         {
                             Id_Contrato = reader.GetInt32(0),
-                            Id_Inquilino = reader.GetInt32(1),
-                            Id_Inmueble = reader.GetInt32(2),
+                            Id_Inmueble = reader.GetInt32(1),
+                            Id_Inquilino = reader.GetInt32(2),
                             FechaDesde = reader.GetDateTime(3),
                             FechaHasta = reader.GetDateTime(4),
                             ImporteMensual = reader.GetDecimal(5),
@@ -173,14 +173,14 @@ namespace WebApplication1.Models
 
                             Inquilino = new Inquilino
                             {
-                                Id_Inquilino = reader.GetInt32(1),
+                                Id_Inquilino = reader.GetInt32(2),
                                 NombreI = reader.GetString(7),
                                 ApellidoI = reader.GetString(8),
                             },
 
                             Inmueble = new Inmueble
                             {
-                                Id_Inmueble = reader.GetInt32(2),
+                                Id_Inmueble = reader.GetInt32(1),
                                 DireccionInm = reader.GetString(9)
                             }
 
