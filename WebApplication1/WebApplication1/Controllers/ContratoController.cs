@@ -55,15 +55,24 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add insert logic here
-                int res = repositorioContrato.Alta(c);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioContrato.Alta(c);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
+                    ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
+                    return View();
+                }
             }
             catch(Exception ex)
             {
                 ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
                 ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
                 ViewBag.Error = ex.Message;
-                return View(c);
+                return View();
             }
         }
 
@@ -84,8 +93,17 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add update logic here
-                int res = repositorioContrato.Modificacion(c);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioContrato.Modificacion(c);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
+                    ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
+                    return View(c);
+                }
             }
             catch(Exception ex)
             {

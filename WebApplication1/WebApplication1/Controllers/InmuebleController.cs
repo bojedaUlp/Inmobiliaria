@@ -49,10 +49,15 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
-                int res = repositorioInmueble.Alta(i);
-
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioInmueble.Alta(i);
+                    return RedirectToAction(nameof(Index));
+                }
+                else {
+                    ViewBag.Propietarios = repositorioPropietario.ObtenerTodos();
+                    return View();
+                }
             }
             catch(Exception ex)
             {
@@ -86,8 +91,16 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add update logic here
-                int res = repositorioInmueble.Modificacion(i);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioInmueble.Modificacion(i);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ViewBag.Propietarios = repositorioPropietario.ObtenerTodos();
+                    return View();
+                }
             }
             catch(Exception ex)
             {

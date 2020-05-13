@@ -23,6 +23,7 @@ namespace WebApplication1.Controllers
         // GET: Propietario
         public ActionResult Index()
         {
+            
             var lista = repositorioPropietario.ObtenerTodos();
             return View(lista);
         }
@@ -46,14 +47,16 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                int res = repositorioPropietario.Alta(p);
-
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioPropietario.Alta(p);
+                    return RedirectToAction(nameof(Index));
+                }
+                else { return View(); }
             }
-            catch
+            catch(Exception ex)
             {
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
@@ -81,13 +84,18 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add update logic here
-                int res = repositorioPropietario.Modificacion(p);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioPropietario.Modificacion(p);
+                    return RedirectToAction(nameof(Index));
+                }
+                else { return View(); }
+             
             }
             catch(Exception ex)
             {
                 ViewBag.Error(ex.Message);
-                return View(p);
+                return View();
             }
         }
 
@@ -95,9 +103,10 @@ namespace WebApplication1.Controllers
         public ActionResult Delete(int id)
         {
             try
-            {
-                Propietario p = repositorioPropietario.ObtenerPorId(id);
-                return View(p);
+            {         
+                 Propietario p = repositorioPropietario.ObtenerPorId(id);
+                 return View(p);
+               
             }catch(Exception ex)
             {
                 ViewBag.Error = ex.Message;
@@ -113,8 +122,13 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add delete logic here
-                int res = repositorioPropietario.Baja(id);
-                return RedirectToAction(nameof(Index));
+                if(ModelState.IsValid)
+                {
+                    int res = repositorioPropietario.Baja(id);
+                    return RedirectToAction(nameof(Index));
+                }
+                else { return View(); }
+                
             }
             catch(Exception ex)
             {

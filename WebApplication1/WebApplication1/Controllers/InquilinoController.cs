@@ -47,8 +47,12 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add insert logic here
-                int res = repositorioInquilino.Alta(i);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioInquilino.Alta(i);
+                    return RedirectToAction(nameof(Index));
+                }
+                else { return View(); }
             }
             catch(Exception ex)
             {
@@ -79,15 +83,20 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add update logic here
-
-                int res = repositorioInquilino.Modificacion(i);
-
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioInquilino.Modificacion(i);
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch(Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(i);
+                return View();
             }
         }
 
@@ -96,6 +105,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
+
                 Inquilino i = repositorioInquilino.ObtenerPorId(id);
                 return View(i);
             }catch(Exception ex)
@@ -114,8 +124,12 @@ namespace WebApplication1.Controllers
             try
             {
                 // TODO: Add delete logic here
-                int res = repositorioInquilino.Baja(id);
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    int res = repositorioInquilino.Baja(id);
+                    return RedirectToAction(nameof(Index));
+                }
+                else { return View(); }
             }
             catch(Exception ex)
             {

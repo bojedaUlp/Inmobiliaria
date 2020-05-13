@@ -69,8 +69,8 @@ namespace WebApplication1.Models
             int res = -1;
             using (SqlConnection connection=new SqlConnection(connectionString))
             {
-                string sql = $"UPDATE Contrato SET id_Inmueble=@idInmueble, id_Inquilino=@inqui, fechaDesde=@fechaD, fechaHasta=@fechaH, importeMensual=@importe, estadoContrato=@estado" +
-                        $"WHERE id_Contrato=@idC;";
+                string sql = $"UPDATE Contrato SET id_Inmueble=@idInmueble, id_Inquilino=@inqui, fechaDesde=@fechaD, fechaHasta=@fechaH, importeMensual=@importe, estadoContrato=@estado " +
+                        $" WHERE id_Contrato=@idC;";
 
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
@@ -161,7 +161,7 @@ namespace WebApplication1.Models
                     var reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Contrato c = new Contrato
+                         res = new Contrato
                         {
                             Id_Contrato = reader.GetInt32(0),
                             Id_Inmueble = reader.GetInt32(1),

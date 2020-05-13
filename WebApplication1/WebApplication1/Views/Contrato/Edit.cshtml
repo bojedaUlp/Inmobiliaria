@@ -18,7 +18,7 @@
                 <span asp-validation-for="Id_Contrato" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Id_Inquilino" class="control-label"></label>
+                <label asp-for="Inquilino" class="control-label"></label>
                 <select class="form-control" name="Id_Inquilino">
                     @foreach (var item in (IList<Inquilino>)ViewBag.Inquilinos)
                     {
@@ -27,9 +27,13 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="Id_Inmueble" class="control-label"></label>
-                <input asp-for="Id_Inmueble" class="form-control" />
-                <span asp-validation-for="Id_Inmueble" class="text-danger"></span>
+                <label asp-for="Inmueble" class="control-label"></label>
+                <select class="form-control" name="Id_Inmueble">
+                    @foreach (var item in (IList<Inmueble>)ViewBag.Inmuebles)
+                    {
+                        @:<option @(item.Id_Inmueble == Model.Id_Inmueble ? "selected" : "") value="@item.Id_Inmueble">@(item.DireccionInm)</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="FechaDesde" class="control-label"></label>
