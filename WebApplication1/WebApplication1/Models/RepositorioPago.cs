@@ -197,5 +197,62 @@ namespace WebApplication1.Models
             return res;
         }
 
+        public IList<Pago> ObtenerPorIdInquilino(int id)
+        {
+            IList<Pago> res = new List<Pago>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = $"SELECT id_Pago,p.id_Contrato,importe,fechaPago, " +
+                    $" inqui.nombreI, inqui.apellidoI, i.direccionInm " +
+                    $" FROM Pago p INNER JOIN Contrato c ON p.id_Contrato=c.id_Contrato " +
+                    $" INNER JOIN Inmueble i ON c.id_Inmueble= i.id_Inmueble " +
+                    $" INNER JOIN Inquilino inqui ON c.id_Inquilino= inqui.id_Inquilino " +
+                    $" WHERE c.id_Inquilino=@idI " ;
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.AddWithValue("@idI",id);
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Pago p = new Pago
+                        {
+                            Id_Pago = reader.GetInt32(0),
+                            Id_Contrato = reader.GetInt32(1),
+                            Importe = reader.GetDecimal(2),
+                            FechaPago = reader.GetDateTime(3),
+
+                            Contrato = new Contrato
+                            {
+                                Id_Contrato = reader.GetInt32(1),
+                                Inquilino = new Inquilino
+                                {
+
+                                    NombreI = reader.GetString(4),
+                                    ApellidoI = reader.GetString(5),
+                                },
+                                Inmueble = new Inmueble
+                                {
+
+                                    DireccionInm = reader.GetString(6),
+                                }
+
+                            }
+
+                        };
+                        res.Add(p);
+                    }
+                    connection.Close();
+                }
+            }
+
+            return res;
+        }
+
+
     }
 }

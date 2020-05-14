@@ -184,6 +184,51 @@ namespace WebApplication1.Models
         }
 
 
+        public IList<Inmueble> ObtenerPorIdPropietario(int id)
+        {
+            IList<Inmueble> res = new List<Inmueble>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sql = $"SELECT id_Inmueble, i.id_Propietario, direccionInm, uso, tipo, cantAmbientes,precioInm,estadoInm," +
+                    " p.nombreP,p.apellidoP" +
+                    $" FROM Inmueble i INNER JOIN Propietario p ON i.id_Propietario = p.id_Propietario  " +
+                    $" WHERE p.id_Propietario=@idP ";
+
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.AddWithValue("@idP",id);
+                    connection.Open();
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Inmueble i = new Inmueble
+                        {
+                            Id_Inmueble = reader.GetInt32(0),
+                            Id_Propietario = reader.GetInt32(1),
+                            DireccionInm = reader.GetString(2),
+                            Uso = reader.GetString(3),
+                            Tipo = reader.GetString(4),
+                            CantAmbientes = reader.GetInt32(5),
+                            PrecioInm = reader.GetDecimal(6),
+                            EstadoInm = reader.GetInt32(7),
+
+                            Propietario = new Propietario
+                            {
+                                Id_Propietario = reader.GetInt32(1),
+                                NombreP = reader.GetString(8),
+                                ApellidoP = reader.GetString(9),
+                            }
+
+                        }; res.Add(i);
+
+                    }
+
+                    connection.Close();
+                }
+            }
+            return res;
+        }
 
 
     }

@@ -29,6 +29,15 @@ namespace WebApplication1.Controllers
             return View(lista);
         }
 
+
+        public ActionResult PorPropietario(int id)
+        {
+            var lista = repositorioInmueble.ObtenerPorIdPropietario(id);
+            ViewBag.Id_Propietario = id;
+            ViewBag.Propietario = repositorioPropietario.ObtenerPorId(id);
+            return View(lista);
+        }
+
         // GET: Inmueble/Details/5
         public ActionResult Details(int id)
         {

@@ -253,3 +253,5 @@ C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\ob
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Pago\Delete.cshtml.g.cs
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Create.cshtml.g.cs
 C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Login.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Inmueble\PorPropietario.cshtml.g.cs
+C:\Users\Charly\Documents\GitHub\Inmobiliaria\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Pago\PorPago.cshtml.g.cs

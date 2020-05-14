@@ -15,18 +15,36 @@ namespace WebApplication1.Controllers
         private readonly IConfiguration configuration;
         private readonly RepositorioPago repositorioPago;
         private readonly RepositorioContrato repositorioContrato;
+        private readonly RepositorioInquilino repositorioInquilino;
 
         public PagoController(IConfiguration configuration)
         {
             this.configuration = configuration;
             repositorioPago = new RepositorioPago(configuration);
             repositorioContrato = new RepositorioContrato(configuration);
+            repositorioInquilino = new RepositorioInquilino(configuration);
         }
         // GET: Pago
         public ActionResult Index()
         {
             try {
                 var lista = repositorioPago.ObtenerTodos();
+                return View(lista);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+        }
+
+        public ActionResult PorPago(int id)
+        {
+            try
+            {
+                var lista = repositorioPago.ObtenerPorIdInquilino(id);
+                ViewBag.id_Inquilino = id;
+                ViewBag.Inquilino = repositorioInquilino.ObtenerPorId(id);
                 return View(lista);
             }
             catch (Exception ex)
