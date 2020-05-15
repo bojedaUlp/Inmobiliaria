@@ -11,8 +11,10 @@ namespace WebApplication1.Models
         [DisplayName("Codigo")]
         public int Id_Contrato { get; set; }
 
+        [DisplayName("Inquilino")]
         public int Id_Inquilino { get; set; }
         public Inquilino Inquilino { get; set; }
+        [DisplayName("Inmueble")]
         public int Id_Inmueble { get; set; }
         public Inmueble Inmueble { get; set; }
 

@@ -46,7 +46,7 @@
                 @(item.Inquilino.NombreI + " " + item.Inquilino.ApellidoI)
             </td>
             <td>
-                @(item.Inmueble.Id_Inmueble + " " + item.Inmueble.DireccionInm)
+                @(item.Inmueble.Id_Inmueble + " - " + item.Inmueble.DireccionInm)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FechaDesde)
@@ -62,7 +62,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new {  id=item.Id_Contrato }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id_Contrato }) |
+                @Html.ActionLink("Pagar", "PagarDeContrato","Pago", new {  id=item.Id_Contrato }) |
                 @Html.ActionLink("Delete", "Delete", new {  id=item.Id_Contrato })
             </td>
         </tr>

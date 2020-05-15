@@ -75,6 +75,23 @@ namespace WebApplication1.Controllers
             }
         }
 
+        public ActionResult PagarDeContrato(int id)
+        {
+            try
+            {
+                ViewBag.Contrato = repositorioContrato.ObtenerPorId(id);
+                ViewBag.Id_Contrato = id;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Contratos = repositorioContrato.ObtenerTodos();
+                ViewBag.Error = ex.Message;
+                return View();
+            }
+        }
+
+
         // POST: Pago/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
