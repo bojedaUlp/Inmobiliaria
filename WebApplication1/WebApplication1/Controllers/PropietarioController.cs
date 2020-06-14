@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,14 +15,17 @@ namespace WebApplication1.Controllers
     {
         private readonly IConfiguration configuration;
         private readonly RepositorioPropietario repositorioPropietario;
+        private readonly RepositorioUsuario repositorioUsuario;
 
         public PropietarioController(IConfiguration configuration)
         {
             this.configuration = configuration;
             repositorioPropietario = new RepositorioPropietario(configuration);
+            repositorioUsuario = new RepositorioUsuario(configuration);
         }
 
         // GET: Propietario
+        [Authorize(Policy = "Administrador")]
         public ActionResult Index()
         {
             
@@ -29,12 +34,14 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Propietario/Details/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: Propietario/Create
+        [Authorize(Policy = "Administrador")]
         public ActionResult Create()
         {
             return View();
@@ -45,12 +52,20 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Propietario p)
         {
+           
             try
             {
-                if (ModelState.IsValid)
+                if(ModelState.IsValid)
                 {
+                    p.ClaveP = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                       password: p.ClaveP,
+                       salt: System.Text.Encoding.ASCII.GetBytes(configuration["Salt"]),
+                       prf: KeyDerivationPrf.HMACSHA1,
+                       iterationCount: 1000,
+                       numBytesRequested: 256 / 8));
                     int res = repositorioPropietario.Alta(p);
-                    return RedirectToAction(nameof(Index));
+                    TempData["Id_Propietario"] = p.Id_Propietario;                 
+                    return RedirectToAction(nameof(Index));                    
                 }
                 else { return View(); }
             }
@@ -62,6 +77,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Propietario/Edit/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Edit(int id)
         {
             try
@@ -79,6 +95,7 @@ namespace WebApplication1.Controllers
         // POST: Propietario/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Edit(int id, Propietario p)
         {
             try
@@ -100,6 +117,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Propietario/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             try
@@ -117,6 +135,7 @@ namespace WebApplication1.Controllers
         // POST: Propietario/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Propietario p)
         {
             try

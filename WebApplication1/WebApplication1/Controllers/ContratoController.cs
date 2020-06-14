@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -40,12 +41,14 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Contrato/Create
+        [Authorize(Policy = "Administrador")]
         public ActionResult Create()
         {
             ViewBag.Inmuebles = repositorioInmueble.ObtenerTodos();
             ViewBag.Inquilinos = repositorioInquilino.ObtenerTodos();
             return View();
         }
+
 
         // POST: Contrato/Create
         [HttpPost]
@@ -77,6 +80,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Contrato/Edit/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Edit(int id)
         {
             var c = repositorioContrato.ObtenerPorId(id);
@@ -88,6 +92,7 @@ namespace WebApplication1.Controllers
         // POST: Contrato/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Edit(int id, Contrato c)
         {
             try
@@ -115,6 +120,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Contrato/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             try
@@ -132,6 +138,7 @@ namespace WebApplication1.Controllers
         // POST: Contrato/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Contrato c)
         {
             try

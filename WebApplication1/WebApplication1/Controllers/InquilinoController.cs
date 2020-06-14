@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -28,12 +29,14 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Inquilino/Details/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: Inquilino/Create
+        [Authorize(Policy = "Administrador")]
         public ActionResult Create()
         {
             return View();
@@ -42,6 +45,7 @@ namespace WebApplication1.Controllers
         // POST: Inquilino/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Create(Inquilino i)
         {
             try
@@ -62,6 +66,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Inquilino/Edit/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Edit(int id)
         {
             try
@@ -101,6 +106,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Inquilino/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             try
@@ -119,6 +125,7 @@ namespace WebApplication1.Controllers
         // POST: Inquilino/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Inquilino i)
         {
             try

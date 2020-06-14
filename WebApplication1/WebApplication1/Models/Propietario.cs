@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +10,8 @@ namespace WebApplication1.Models
 {
     public class Propietario
     {
-        [DisplayName ("Codigo")]
+        [Key]
+        [DisplayName("Codigo")]
         public int Id_Propietario { get; set; }
 
         [DisplayName("Nombre")]
@@ -28,6 +31,8 @@ namespace WebApplication1.Models
 
         [DisplayName("Email")]
         public String EmailP {get;set;}
+
+        public String ClaveP { get; set; }
 
 
     }

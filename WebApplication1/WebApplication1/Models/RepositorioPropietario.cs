@@ -24,8 +24,8 @@ namespace WebApplication1.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"INSERT INTO Propietario (nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP) " +
-					$"VALUES (@nombre, @apellido, @domicilio, @dni, @telefono, @email);" +
+				string sql = $"INSERT INTO Propietario (nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP,claveP) " +
+					$"VALUES (@nombre, @apellido, @domicilio, @dni, @telefono, @email, @claveP);" +
 					$"SELECT SCOPE_IDENTITY();";//devuelve el id insertado
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -36,6 +36,7 @@ namespace WebApplication1.Models
 					command.Parameters.AddWithValue("@dni", p.DniP);
 					command.Parameters.AddWithValue("@telefono", p.TelefonoP);
 					command.Parameters.AddWithValue("@email", p.EmailP);
+					command.Parameters.AddWithValue("@claveP", p.ClaveP);
 					connection.Open();
 					res = Convert.ToInt32(command.ExecuteScalar());
 					p.Id_Propietario = res;
@@ -66,7 +67,7 @@ namespace WebApplication1.Models
 			int res = -1;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"UPDATE Propietario SET nombreP=@nombre, apellidoP=@apellido,dniP=@dni, domicilioP=@domicilio, telefonoP=@telefono, emailP=@email" +
+				string sql = $"UPDATE Propietario SET nombreP=@nombre, apellidoP=@apellido,dniP=@dni, domicilioP=@domicilio, telefonoP=@telefono, emailP=@email, claveP=@claveP " +
 					$" WHERE id_Propietario = @id";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -77,6 +78,7 @@ namespace WebApplication1.Models
 					command.Parameters.AddWithValue("@dni", p.DniP);
 					command.Parameters.AddWithValue("@telefono", p.TelefonoP);
 					command.Parameters.AddWithValue("@email", p.EmailP);
+					command.Parameters.AddWithValue("@claveP", p.ClaveP);
 					command.Parameters.AddWithValue("@id", p.Id_Propietario);
 					connection.Open();
 					res = command.ExecuteNonQuery();
@@ -91,7 +93,7 @@ namespace WebApplication1.Models
 			IList<Propietario> res = new List<Propietario>();
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT id_Propietario, nombreP, apellidoP, domicilioP, dniP,telefonoP,emailP" +
+				string sql = $"SELECT id_Propietario, nombreP, apellidoP, domicilioP, dniP,telefonoP,emailP, claveP " +
 					$" FROM Propietario";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -109,6 +111,7 @@ namespace WebApplication1.Models
 							DniP = reader.GetString(4),
 							TelefonoP = reader.GetString(5),
 							EmailP = reader.GetString(6),
+							ClaveP=reader.GetString(7),
 							
 						};
 						res.Add(p);
@@ -124,7 +127,7 @@ namespace WebApplication1.Models
 			Propietario p = null;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT id_Propietario,nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP FROM Propietario" +
+				string sql = $"SELECT id_Propietario,nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP, claveP FROM Propietario" +
 					$" WHERE id_Propietario=@id";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -143,6 +146,7 @@ namespace WebApplication1.Models
 							DniP = reader.GetString(4),
 							TelefonoP = reader.GetString(5),
 							EmailP = reader.GetString(6),
+							ClaveP = reader.GetString(7),
 						};
 					}
 					connection.Close();
@@ -156,7 +160,7 @@ namespace WebApplication1.Models
 			Propietario p = null;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT id_Propietario,nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP  FROM Propietario" +
+				string sql = $"SELECT id_Propietario,nombreP,apellidoP,domicilioP,dniP,telefonoP,emailP, claveP  FROM Propietario" +
 					$" WHERE emailP=@email";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -175,6 +179,7 @@ namespace WebApplication1.Models
 							DniP = reader.GetString(4),
 							TelefonoP = reader.GetString(5),
 							EmailP = reader.GetString(6),
+							ClaveP = reader.GetString(7),
 						};
 					}
 					connection.Close();
@@ -189,7 +194,7 @@ namespace WebApplication1.Models
 			Propietario p = null;
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				string sql = $"SELECT id_Propietario, nombreP, apellidoP,domicilioP, dniP, telefonoP, emailP FROM Propietario" +
+				string sql = $"SELECT id_Propietario, nombreP, apellidoP,domicilioP, dniP, telefonoP, emailP, claveP  FROM Propietario" +
 					$" WHERE nombreP LIKE %@nombre% OR apellidoP LIKE %@nombre";
 				using (SqlCommand command = new SqlCommand(sql, connection))
 				{
@@ -208,7 +213,8 @@ namespace WebApplication1.Models
 							DniP = reader.GetString(4),
 							TelefonoP = reader.GetString(5),
 							EmailP = reader.GetString(6),
-							
+							ClaveP = reader.GetString(7),
+
 						};
 						res.Add(p);
 					}

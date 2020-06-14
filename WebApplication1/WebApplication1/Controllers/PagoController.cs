@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -61,6 +62,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Pago/Create
+        [Authorize(Policy = "Administrador")]
         public ActionResult Create()
         {
             try
@@ -75,6 +77,7 @@ namespace WebApplication1.Controllers
             }
         }
 
+        [Authorize(Policy = "Administrador")]
         public ActionResult PagarDeContrato(int id)
         {
             try
@@ -95,6 +98,7 @@ namespace WebApplication1.Controllers
         // POST: Pago/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Create(Pago p)
         {
             try
@@ -111,7 +115,8 @@ namespace WebApplication1.Controllers
             }
         }
 
-        // GET: Pago/Edit/5
+        // GET: Pago/Edit/5  
+        [Authorize(Policy = "Administrador")]
         public ActionResult Edit(int id)
         {
             try {
@@ -159,6 +164,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Pago/Delete/5
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id)
         {
             try
@@ -176,6 +182,7 @@ namespace WebApplication1.Controllers
         // POST: Pago/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "Administrador")]
         public ActionResult Delete(int id, Pago p )
         {
             try

@@ -66,7 +66,7 @@ namespace WebApplication1.Controllers
                         iterationCount: 1000,
                         numBytesRequested: 256 / 8));
                 u.Password = hashed;
-                u.Rol = User.IsInRole("Administrador") ? u.Rol : (int)enRoles.Empleado;
+                u.Rol = User.IsInRole("Administrador") ? u.Rol : (int)enRoles.Propietario;
                 var nbreRnd = Guid.NewGuid();//posible nombre aleatorio
                 int res = repositorioUsuario.Alta(u);
                
@@ -75,6 +75,7 @@ namespace WebApplication1.Controllers
             catch (Exception ex)
             {
                 ViewBag.Roles = Usuario.ObtenerRoles();
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
@@ -89,9 +90,10 @@ namespace WebApplication1.Controllers
 
         // POST: Usuario/CreateLogin
 
-        [AllowAnonymous]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<ActionResult> LoginAsync(LoginViewModel login)
         {
             try
