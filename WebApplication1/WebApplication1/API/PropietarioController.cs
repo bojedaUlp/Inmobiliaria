@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using WebApplication1.Models;
@@ -122,10 +123,42 @@ namespace WebApplication1.API
         }
 
         // PUT: api/Propietario/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public async Task<IActionResult> Put(Propietario prop)
         {
-            
+            try
+            {
+                Propietario p = new Propietario();
+
+                if (ModelState.IsValid && contexto.Propietario.AsNoTracking().SingleOrDefault(e => e.EmailP == User.Identity.Name) != null)
+                {
+                    p.ClaveP = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                                                password: prop.ClaveP,
+                                                salt: System.Text.Encoding.ASCII.GetBytes("Salt"),
+                                                prf: KeyDerivationPrf.HMACSHA1,
+                                                iterationCount: 1000,
+                                                numBytesRequested: 256 / 8));
+                    p = contexto.Propietario.SingleOrDefault(x => x.EmailP == User.Identity.Name);
+                    p.NombreP = prop.NombreP;
+                    p.ApellidoP = prop.ApellidoP;
+                    p.DniP = prop.DniP;
+                    p.DomicilioP = prop.DomicilioP;
+                    p.TelefonoP = prop.TelefonoP;
+                    p.EmailP = prop.EmailP;
+                    p.ClaveP = prop.ClaveP;
+
+                    contexto.Propietario.Update(p);
+                    contexto.SaveChanges();
+                    return Ok(p);
+
+                }
+                else {
+                    return BadRequest();
+                }
+            }
+            catch(Exception ex) {
+                return BadRequest(ex);
+            }
         }
 
         // DELETE: api/ApiWithActions/5

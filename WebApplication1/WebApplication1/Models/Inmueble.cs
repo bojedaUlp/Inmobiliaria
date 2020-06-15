@@ -15,8 +15,9 @@ namespace WebApplication1.Models
         public int Id_Inmueble { get; set; }
 
         [DisplayName("Codigo Propietario")]
-        [ForeignKey("Id_Propietario")]
         public int Id_Propietario { get; set; }
+
+        [ForeignKey("Id_Propietario")]
         public Propietario Propietario { get; set; }
 
         [DisplayName("Direccion")]
